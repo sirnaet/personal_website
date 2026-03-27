@@ -1,0 +1,26 @@
+name: personal_website
+description: A modern cyber-themed personal portfolio website built with Flutter Web
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  scrollable_positioned_list: ^0.3.6
+  url_launcher: ^6.2.5
+  flutter_animate: ^4.5.0
+  font_awesome_flutter: ^11.0.0
+  http: ^1.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/

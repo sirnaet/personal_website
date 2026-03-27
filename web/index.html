@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Modern cyber-themed personal portfolio">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Sanaet Memusi">
+  <link rel="icon" type="image/png" href="Sirnaet-logo.png"/>
+  <title>Sanaet Memusi</title>
+  <link rel="manifest" href="manifest.json">
+  <script>
+    var reactPortfolioUrl = new URL('react-portfolio/index.html', document.baseURI);
+    var reactPortfolioPath = reactPortfolioUrl.pathname;
+    var reactPortfolioDirPath = reactPortfolioPath.replace(/index\.html$/, '');
+    var isReactPortfolioRoute =
+      window.location.pathname === reactPortfolioDirPath.replace(/\/$/, '') ||
+      window.location.pathname === reactPortfolioDirPath ||
+      window.location.pathname === reactPortfolioPath;
+
+    var scriptLoaded = false;
+    function loadMainDartJs() {
+      if (isReactPortfolioRoute) {
+        return;
+      }
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
+    }
+
+    function loadReactPortfolio() {
+      document.title = 'Sanaet Memusi';
+
+      var favicon = document.querySelector('link[rel="icon"]');
+      if (favicon) {
+        favicon.href = new URL('react-portfolio/Sirnaet-logo.png', document.baseURI).toString();
+        favicon.type = 'image/png';
+      }
+
+      var stylesheet = document.createElement('link');
+      stylesheet.rel = 'stylesheet';
+      stylesheet.crossOrigin = '';
+      stylesheet.href = new URL('react-portfolio/assets/index.css', document.baseURI).toString();
+      document.head.appendChild(stylesheet);
+
+      var root = document.createElement('div');
+      root.id = 'root';
+      document.body.appendChild(root);
+
+      var scriptTag = document.createElement('script');
+      scriptTag.type = 'module';
+      scriptTag.crossOrigin = '';
+      scriptTag.src = new URL('react-portfolio/assets/index.js', document.baseURI).toString();
+      document.body.appendChild(scriptTag);
+    }
+
+    if (isReactPortfolioRoute) {
+      window.addEventListener('DOMContentLoaded', function () {
+        loadReactPortfolio();
+      });
+    } else if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        loadMainDartJs();
+      });
+    } else {
+      window.addEventListener('DOMContentLoaded', function () {
+        loadMainDartJs();
+      });
+    }
+  </script>
+</head>
+<body>
+  <script>
+    if (!isReactPortfolioRoute) {
+      window.addEventListener('load', function(ev) {
+        _flutter.loader.load({
+          onEntrypointLoaded: function(engineInitializer) {
+            engineInitializer.initializeEngine().then(function(appRunner) {
+              appRunner.runApp();
+            });
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
