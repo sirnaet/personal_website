@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class ContactFormService {
   static const _defaultEndpoint =
-      'https://script.google.com/macros/s/AKfycbxUhN6EBrjzBQvzRrfifFaCF4IJ8O3oTxilxxAiIon_nQDIMVDBtEv6niNDQS_jLcqK/exec';
+      'https://script.google.com/macros/s/AKfycbyKBeT2AYqFDbp7fFe7TBdPVicrx5FQMQd6V4t84rIpK-eY4Fk2AeC1slsLF045-gCK/exec';
   static const _endpoint = String.fromEnvironment(
     'CONTACT_FORM_ENDPOINT',
     defaultValue: _defaultEndpoint,
