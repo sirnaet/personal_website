@@ -334,9 +334,9 @@ export default function PersonalWebsite() {
                   href={project.linkUrl}
                   target={project.linkUrl.startsWith('http') ? '_blank' : undefined}
                   rel={project.linkUrl.startsWith('http') ? 'noreferrer' : undefined}
-                  className="inline-flex items-center text-white underline decoration-white/30 underline-offset-4 transition hover:decoration-white"
+                  className="inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90"
                 >
-                  {project.linkLabel}
+                  {project.linkLabel || 'View Project'}
                 </a>
               </div>
               <div className="mt-4 flex flex-wrap gap-2 text-xs text-white/60">

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "536099252904",
+    "project_id": "sanaetmemusi-f7434",
+    "storage_bucket": "sanaetmemusi-f7434.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536099252904:android:5d6b94ec8d640baabd309d",
+        "android_client_info": {
+          "package_name": "com.example.personal_website"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTvM6CJAKozd3eLz4InmSVPE07j0rCh7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

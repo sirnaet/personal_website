@@ -1,0 +1,39 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "sanaetmemusi-f7434",
+          "appId": "1:536099252904:android:5d6b94ec8d640baabd309d",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "sanaetmemusi-f7434",
+          "configurations": {
+            "android": "1:536099252904:android:5d6b94ec8d640baabd309d",
+            "ios": "1:536099252904:ios:2a4659a21da3359bbd309d",
+            "macos": "1:536099252904:ios:2a4659a21da3359bbd309d",
+            "web": "1:536099252904:web:7f418fa7d22bba77bd309d",
+            "windows": "1:536099252904:web:59ca1a04e0148311bd309d"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "personal_website",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
