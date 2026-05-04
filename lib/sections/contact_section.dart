@@ -301,7 +301,7 @@ class _ContactInfo extends StatelessWidget {
             const SizedBox(height: 20),
             _ContactItem(
               icon: const FaIcon(
-                FontAwesomeIcons.twitter,
+                FontAwesomeIcons.xTwitter,
                 color: AppTheme.accentColor,
                 size: 24,
               ),
