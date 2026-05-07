@@ -305,7 +305,7 @@ class _ContactInfo extends StatelessWidget {
                 color: AppTheme.accentColor,
                 size: 24,
               ),
-              label: 'X (Twitter)',
+              label: 'X (formerly Twitter)',
               value: 'x.com/Sir__naet',
               onTap: () async {
                 const url = 'https://x.com/Sir__naet';
