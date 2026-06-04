@@ -13,8 +13,8 @@ class StickyNav extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 24 : 40,
-        vertical: 16,
+        horizontal: isMobile ? 20 : 40,
+        vertical: isMobile ? 12 : 16,
       ),
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.8),
@@ -30,30 +30,43 @@ class StickyNav extends StatelessWidget {
           GestureDetector(
             onTap: () => onSectionTap('top'),
             child: Text(
-              'BRIAN SANAET MEMUSI',
+              isMobile ? 'B. SANAET MEMUSI' : 'BRIAN SANAET MEMUSI',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: AppTheme.textSecondary,
                     fontWeight: FontWeight.w600,
-                    letterSpacing: 4,
+                    letterSpacing: isMobile ? 2 : 4,
                   ),
             ),
           ),
-          Wrap(
-            spacing: isMobile ? 12 : 24,
-            runSpacing: 8,
-            alignment: WrapAlignment.end,
-            children: [
-              _NavLink(label: 'About', onTap: () => onSectionTap('about')),
-              _NavLink(label: 'Skills', onTap: () => onSectionTap('skills')),
-              _NavLink(label: 'Projects', onTap: () => onSectionTap('projects')),
-              _NavLink(
-                label: 'Experience',
-                onTap: () => onSectionTap('experience'),
+          if (isMobile)
+            Builder(
+              builder: (context) => IconButton(
+                icon: const Icon(
+                  Icons.menu_rounded,
+                  color: AppTheme.accentColor,
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
               ),
-              _NavLink(label: 'CV', onTap: () => onSectionTap('cv')),
-              _NavLink(label: 'Contact', onTap: () => onSectionTap('contact')),
-            ],
-          ),
+            )
+          else
+            Wrap(
+              spacing: 24,
+              runSpacing: 8,
+              alignment: WrapAlignment.end,
+              children: [
+                _NavLink(label: 'About', onTap: () => onSectionTap('about')),
+                _NavLink(label: 'Skills', onTap: () => onSectionTap('skills')),
+                _NavLink(label: 'Projects', onTap: () => onSectionTap('projects')),
+                _NavLink(
+                  label: 'Experience',
+                  onTap: () => onSectionTap('experience'),
+                ),
+                _NavLink(label: 'CV', onTap: () => onSectionTap('cv')),
+                _NavLink(label: 'Contact', onTap: () => onSectionTap('contact')),
+              ],
+            ),
         ],
       ),
     );

@@ -23,23 +23,44 @@ class FooterSection extends StatelessWidget {
           ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            '(c) $year Brian Sanaet Memusi. All rights reserved.',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppTheme.textSecondary,
+      child: isMobile
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '© $year Brian Sanaet Memusi. All rights reserved.',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppTheme.textSecondary,
+                      ),
+                  textAlign: TextAlign.center,
                 ),
-          ),
-          Text(
-            'Built with Flutter Web.',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppTheme.textSecondary.withValues(alpha: 0.8),
+                const SizedBox(height: 8),
+                Text(
+                  'Built with Flutter Web.',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppTheme.textSecondary.withValues(alpha: 0.8),
+                      ),
+                  textAlign: TextAlign.center,
                 ),
-          ),
-        ],
-      ),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '© $year Brian Sanaet Memusi. All rights reserved.',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppTheme.textSecondary,
+                      ),
+                ),
+                Text(
+                  'Built with Flutter Web.',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppTheme.textSecondary.withValues(alpha: 0.8),
+                      ),
+                ),
+              ],
+            ),
     );
   }
 }

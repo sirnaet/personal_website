@@ -58,7 +58,7 @@ class HeroSection extends StatelessWidget {
 
   Widget _buildContent(BuildContext context, bool isMobile) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
@@ -67,6 +67,7 @@ class HeroSection extends StatelessWidget {
                 color: AppTheme.textSecondary,
                 letterSpacing: 3,
               ),
+          textAlign: isMobile ? TextAlign.center : TextAlign.start,
         )
             .animate()
             .fadeIn(duration: 600.ms),
@@ -77,10 +78,12 @@ class HeroSection extends StatelessWidget {
                 fontSize: isMobile ? 32 : 60,
                 fontWeight: FontWeight.w600,
               ),
+          textAlign: isMobile ? TextAlign.center : TextAlign.start,
         )
             .animate()
             .fadeIn(delay: 200.ms, duration: 600.ms)
-            .slideX(begin: -0.1, end: 0),
+            .slideX(begin: isMobile ? 0 : -0.1, end: 0)
+            .slideY(begin: isMobile ? 0.1 : 0, end: 0),
         const SizedBox(height: 8),
         Text(
           'Developer - Cybersecurity Enthusiast - Student',
@@ -88,10 +91,12 @@ class HeroSection extends StatelessWidget {
                 color: AppTheme.textSecondary,
                 fontSize: isMobile ? 16 : 22,
               ),
+          textAlign: isMobile ? TextAlign.center : TextAlign.start,
         )
             .animate()
             .fadeIn(delay: 400.ms, duration: 600.ms)
-            .slideX(begin: -0.1, end: 0),
+            .slideX(begin: isMobile ? 0 : -0.1, end: 0)
+            .slideY(begin: isMobile ? 0.1 : 0, end: 0),
         const SizedBox(height: 24),
         Text(
           'I build clean digital experiences, explore new technologies, and create products that solve real problems - with a focus on security, performance, and thoughtful user experience.',
@@ -100,14 +105,17 @@ class HeroSection extends StatelessWidget {
                 fontSize: isMobile ? 15 : 17,
                 height: 1.6,
               ),
+          textAlign: isMobile ? TextAlign.center : TextAlign.start,
         )
             .animate()
             .fadeIn(delay: 600.ms, duration: 600.ms)
-            .slideX(begin: -0.1, end: 0),
+            .slideX(begin: isMobile ? 0 : -0.1, end: 0)
+            .slideY(begin: isMobile ? 0.1 : 0, end: 0),
         const SizedBox(height: 32),
         Wrap(
           spacing: 16,
           runSpacing: 12,
+          alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
           children: [
             CyberButton(
               text: 'View Projects',
@@ -140,8 +148,9 @@ class HeroSection extends StatelessWidget {
           'Based in Nairobi - Available for remote work & collaborations',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: AppTheme.textSecondary.withValues(alpha: 0.7),
-                letterSpacing: 3,
+                letterSpacing: isMobile ? 1.5 : 3,
               ),
+          textAlign: isMobile ? TextAlign.center : TextAlign.start,
         )
             .animate()
             .fadeIn(delay: 1100.ms, duration: 600.ms),

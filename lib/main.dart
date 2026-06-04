@@ -15,6 +15,7 @@ import 'package:personal_website/sections/contact_section.dart';
 import 'package:personal_website/sections/footer_section.dart';
 import 'package:personal_website/widgets/cursor_glow_overlay.dart';
 import 'package:personal_website/widgets/cyber_button.dart';
+import 'package:personal_website/widgets/mobile_drawer.dart';
 
 const String kFlutterRoute = '/flutter';
 const String kReactPortfolioEntry = 'react-portfolio/';
@@ -349,8 +350,10 @@ class _PortfolioHomeState extends State<PortfolioHome>
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 768;
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
+      drawer: isMobile ? MobileDrawer(onSectionTap: _scrollToSection) : null,
       body: MouseRegion(
         onEnter: (event) {
           if (event.kind == PointerDeviceKind.mouse) {

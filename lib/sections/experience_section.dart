@@ -220,18 +220,23 @@ class ExperienceTimelineItem extends StatelessWidget {
                             ),
                       ),
                       const SizedBox(height: 8),
-                      Row(
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 8,
+                        runSpacing: 4,
                         children: [
                           Text(
                             experience.organization,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          const SizedBox(width: 16),
-                          Text(
-                            '-',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          const SizedBox(width: 16),
+                          if (!isMobile) ...[
+                            const SizedBox(width: 4),
+                            Text(
+                              '-',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            const SizedBox(width: 4),
+                          ],
                           Text(
                             experience.period,
                             style: Theme.of(context)

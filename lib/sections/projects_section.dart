@@ -42,12 +42,29 @@ class ProjectsSection extends StatelessWidget {
             ],
           ).animate().fadeIn(duration: 600.ms).slideY(begin: -0.2, end: 0),
           const SizedBox(height: 60),
-          // Projects grid
           LayoutBuilder(
             builder: (context, constraints) {
-              final crossAxisCount = isMobile ? 1 : (isTablet ? 2 : 3);
               final spacing = isMobile ? 24.0 : 32.0;
-              final mainAxisExtent = isMobile ? 380.0 : (isTablet ? 360.0 : 345.0);
+
+              if (isMobile) {
+                return Column(
+                  children: List.generate(projects.length, (index) {
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: spacing),
+                      child: ProjectCard(project: projects[index])
+                          .animate()
+                          .fadeIn(
+                            delay: (index * 100).ms,
+                            duration: 600.ms,
+                          )
+                          .slideY(begin: 0.2, end: 0),
+                    );
+                  }),
+                );
+              }
+
+              final crossAxisCount = isTablet ? 2 : 3;
+              final mainAxisExtent = isTablet ? 360.0 : 345.0;
 
               return GridView.builder(
                 shrinkWrap: true,
