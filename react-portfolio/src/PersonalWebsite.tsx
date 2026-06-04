@@ -8,7 +8,16 @@ import {
   FaBars,
   FaTimes,
 } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
+import {
+  MdEmail,
+  MdPersonOutline,
+  MdCode,
+  MdFolderOpen,
+  MdWorkOutline,
+  MdDescription,
+  MdMailOutline,
+  MdChevronRight,
+} from 'react-icons/md';
 import heroImage from '../../assets/images/sanaet.jpg';
 import logoImage from '../../assets/images/Sirnaet-logo.png';
 
@@ -143,34 +152,34 @@ export default function PersonalWebsite() {
       <div className="relative z-10 flex flex-col min-h-screen">
       {/* Sticky nav */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-md">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-10">
+        <nav className="flex items-center justify-between px-5 py-3 md:px-10 md:py-4 w-full">
           <a
             href="#top"
-            className="text-xs sm:text-sm font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-white/70 hover:text-white transition-colors duration-200"
+            className="font-mono text-xs font-semibold tracking-[2px] md:tracking-[4px] uppercase text-[#888888] hover:text-[#f5f5f5] transition-colors duration-200"
             onClick={handleSectionLinkClick('top')}
           >
-            <span className="hidden xs:inline sm:inline">BRIAN SANAET MEMUSI</span>
-            <span className="xs:hidden sm:hidden">BRIAN S. MEMUSI</span>
+            <span className="hidden md:inline">BRIAN SANAET MEMUSI</span>
+            <span className="md:hidden">B. SANAET MEMUSI</span>
           </a>
           
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center justify-end gap-6 text-sm text-white/70">
-            <a href="#about" className="hover:text-white transition-colors duration-200" onClick={handleSectionLinkClick('about')}>
+          <div className="hidden md:flex items-center justify-end gap-6 font-mono text-xs text-[#888888]">
+            <a href="#about" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('about')}>
               About
             </a>
-            <a href="#skills" className="hover:text-white transition-colors duration-200" onClick={handleSectionLinkClick('skills')}>
+            <a href="#skills" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('skills')}>
               Skills
             </a>
-            <a href="#projects" className="hover:text-white transition-colors duration-200" onClick={handleSectionLinkClick('projects')}>
+            <a href="#projects" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('projects')}>
               Projects
             </a>
-            <a href="#experience" className="hover:text-white transition-colors duration-200" onClick={handleSectionLinkClick('experience')}>
+            <a href="#experience" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('experience')}>
               Experience
             </a>
-            <a href="#cv" className="hover:text-white transition-colors duration-200" onClick={handleSectionLinkClick('cv')}>
+            <a href="#cv" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('cv')}>
               CV
             </a>
-            <a href="#contact" className="hover:text-white transition-colors duration-200" onClick={handleSectionLinkClick('contact')}>
+            <a href="#contact" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('contact')}>
               Contact
             </a>
           </div>
@@ -178,78 +187,144 @@ export default function PersonalWebsite() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden flex items-center justify-center p-2 text-white/70 hover:text-white focus:outline-none transition-colors duration-200"
+            className="md:hidden flex items-center justify-center p-2 text-[#00ffff] hover:text-white/80 focus:outline-none transition-colors duration-200"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
           </button>
         </nav>
 
-        {/* Mobile Navigation Dropdown */}
+        {/* Mobile Drawer Overlay */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-white/10 bg-black/95 backdrop-blur-md px-6 py-4 flex flex-col gap-4 text-sm text-white/70">
-            <a
-              href="#about"
-              className="hover:text-white transition-colors duration-200 py-1"
-              onClick={(e) => {
-                handleSectionLinkClick('about')(e);
-                setIsMenuOpen(false);
-              }}
-            >
-              About
-            </a>
-            <a
-              href="#skills"
-              className="hover:text-white transition-colors duration-200 py-1"
-              onClick={(e) => {
-                handleSectionLinkClick('skills')(e);
-                setIsMenuOpen(false);
-              }}
-            >
-              Skills
-            </a>
-            <a
-              href="#projects"
-              className="hover:text-white transition-colors duration-200 py-1"
-              onClick={(e) => {
-                handleSectionLinkClick('projects')(e);
-                setIsMenuOpen(false);
-              }}
-            >
-              Projects
-            </a>
-            <a
-              href="#experience"
-              className="hover:text-white transition-colors duration-200 py-1"
-              onClick={(e) => {
-                handleSectionLinkClick('experience')(e);
-                setIsMenuOpen(false);
-              }}
-            >
-              Experience
-            </a>
-            <a
-              href="#cv"
-              className="hover:text-white transition-colors duration-200 py-1"
-              onClick={(e) => {
-                handleSectionLinkClick('cv')(e);
-                setIsMenuOpen(false);
-              }}
-            >
-              CV
-            </a>
-            <a
-              href="#contact"
-              className="hover:text-white transition-colors duration-200 py-1"
-              onClick={(e) => {
-                handleSectionLinkClick('contact')(e);
-                setIsMenuOpen(false);
-              }}
-            >
-              Contact
-            </a>
-          </div>
+          <div
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          />
         )}
+
+        {/* Mobile Drawer Container */}
+        <div
+          className={`fixed top-0 right-0 z-50 h-full w-80 bg-[#0a0a0a] border-l-[1.5px] border-[#222222] rounded-l-[24px] shadow-2xl transition-transform duration-300 ease-in-out transform md:hidden ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex flex-col h-full py-6">
+            {/* Drawer Header */}
+            <div className="px-6 pb-6 flex items-center justify-between">
+              <span className="font-mono text-xs font-bold tracking-[3.5px] text-[#00ffff]">
+                NAVIGATION
+              </span>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-1 text-[#888888] hover:text-white focus:outline-none transition-colors duration-200"
+                aria-label="Close menu"
+              >
+                <FaTimes size={20} />
+              </button>
+            </div>
+
+            {/* Divider */}
+            <div className="h-[1px] bg-[#222222] w-full" />
+
+            {/* Nav Links */}
+            <div className="flex-1 overflow-y-auto py-4 font-mono">
+              <a
+                href="#about"
+                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                onClick={(e) => {
+                  handleSectionLinkClick('about')(e);
+                  setIsMenuOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <MdPersonOutline size={20} className="text-[#888888]" />
+                  <span className="text-sm font-medium">About</span>
+                </div>
+                <MdChevronRight size={16} className="text-[#222222]" />
+              </a>
+
+              <a
+                href="#skills"
+                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                onClick={(e) => {
+                  handleSectionLinkClick('skills')(e);
+                  setIsMenuOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <MdCode size={20} className="text-[#888888]" />
+                  <span className="text-sm font-medium">Skills</span>
+                </div>
+                <MdChevronRight size={16} className="text-[#222222]" />
+              </a>
+
+              <a
+                href="#projects"
+                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                onClick={(e) => {
+                  handleSectionLinkClick('projects')(e);
+                  setIsMenuOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <MdFolderOpen size={20} className="text-[#888888]" />
+                  <span className="text-sm font-medium">Projects</span>
+                </div>
+                <MdChevronRight size={16} className="text-[#222222]" />
+              </a>
+
+              <a
+                href="#experience"
+                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                onClick={(e) => {
+                  handleSectionLinkClick('experience')(e);
+                  setIsMenuOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <MdWorkOutline size={20} className="text-[#888888]" />
+                  <span className="text-sm font-medium">Experience</span>
+                </div>
+                <MdChevronRight size={16} className="text-[#222222]" />
+              </a>
+
+              <a
+                href="#cv"
+                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                onClick={(e) => {
+                  handleSectionLinkClick('cv')(e);
+                  setIsMenuOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <MdDescription size={20} className="text-[#888888]" />
+                  <span className="text-sm font-medium">CV</span>
+                </div>
+                <MdChevronRight size={16} className="text-[#222222]" />
+              </a>
+
+              <a
+                href="#contact"
+                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                onClick={(e) => {
+                  handleSectionLinkClick('contact')(e);
+                  setIsMenuOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <MdMailOutline size={20} className="text-[#888888]" />
+                  <span className="text-sm font-medium">Contact</span>
+                </div>
+                <MdChevronRight size={16} className="text-[#222222]" />
+              </a>
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 pt-4 font-mono text-[10px] text-[#888888]/60">
+              © {new Date().getFullYear()} Brian Sanaet Memusi
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* Hero */}
