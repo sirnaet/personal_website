@@ -1,12 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   FaGithub,
   FaLinkedinIn,
   FaInstagram,
   FaTiktok,
   FaWhatsapp,
-  FaBars,
-  FaTimes,
 } from 'react-icons/fa';
 import {
   MdEmail,
@@ -16,7 +14,7 @@ import {
   MdWorkOutline,
   MdDescription,
   MdMailOutline,
-  MdChevronRight,
+  MdKeyboardArrowDown,
 } from 'react-icons/md';
 import heroImage from '../../assets/images/sanaet.jpg';
 import logoImage from '../../assets/images/Sirnaet-logo.png';
@@ -112,7 +110,20 @@ const experience = [
 ];
 
 export default function PersonalWebsite() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -162,169 +173,92 @@ export default function PersonalWebsite() {
             <span className="md:hidden">B. SANAET MEMUSI</span>
           </a>
           
-          {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center justify-end gap-6 font-mono text-xs text-[#888888]">
-            <a href="#about" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('about')}>
-              About
-            </a>
-            <a href="#skills" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('skills')}>
-              Skills
-            </a>
-            <a href="#projects" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('projects')}>
-              Projects
-            </a>
-            <a href="#experience" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('experience')}>
-              Experience
-            </a>
-            <a href="#cv" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('cv')}>
-              CV
-            </a>
-            <a href="#contact" className="hover:text-[#f5f5f5] transition-colors duration-200" onClick={handleSectionLinkClick('contact')}>
-              Contact
-            </a>
+          {/* Dropdown Menu */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center gap-2 px-3 py-1.5 font-mono text-xs font-medium uppercase text-[#888888] hover:text-[#f5f5f5] hover:bg-[#111111]/50 border border-[#222222] rounded-lg transition-all duration-200 focus:outline-none"
+            >
+              <span>Sections</span>
+              <MdKeyboardArrowDown
+                size={16}
+                className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+            
+            {/* Dropdown Menu Card */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-[#0a0a0a]/95 backdrop-blur-md border border-[#222222] rounded-xl py-1.5 shadow-2xl z-50 font-mono text-xs text-[#888888]">
+                <a
+                  href="#about"
+                  className="flex items-center gap-3 px-4 py-2.5 hover:text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                  onClick={(e) => {
+                    handleSectionLinkClick('about')(e);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <MdPersonOutline size={16} className="text-[#888888]" />
+                  <span>About</span>
+                </a>
+                <a
+                  href="#skills"
+                  className="flex items-center gap-3 px-4 py-2.5 hover:text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                  onClick={(e) => {
+                    handleSectionLinkClick('skills')(e);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <MdCode size={16} className="text-[#888888]" />
+                  <span>Skills</span>
+                </a>
+                <a
+                  href="#projects"
+                  className="flex items-center gap-3 px-4 py-2.5 hover:text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                  onClick={(e) => {
+                    handleSectionLinkClick('projects')(e);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <MdFolderOpen size={16} className="text-[#888888]" />
+                  <span>Projects</span>
+                </a>
+                <a
+                  href="#experience"
+                  className="flex items-center gap-3 px-4 py-2.5 hover:text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                  onClick={(e) => {
+                    handleSectionLinkClick('experience')(e);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <MdWorkOutline size={16} className="text-[#888888]" />
+                  <span>Experience</span>
+                </a>
+                <a
+                  href="#cv"
+                  className="flex items-center gap-3 px-4 py-2.5 hover:text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                  onClick={(e) => {
+                    handleSectionLinkClick('cv')(e);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <MdDescription size={16} className="text-[#888888]" />
+                  <span>CV / Resume</span>
+                </a>
+                <a
+                  href="#contact"
+                  className="flex items-center gap-3 px-4 py-2.5 hover:text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
+                  onClick={(e) => {
+                    handleSectionLinkClick('contact')(e);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <MdMailOutline size={16} className="text-[#888888]" />
+                  <span>Contact</span>
+                </a>
+              </div>
+            )}
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden flex items-center justify-center p-2 text-[#00ffff] hover:text-white/80 focus:outline-none transition-colors duration-200"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-          </button>
         </nav>
-
-        {/* Mobile Drawer Overlay */}
-        {isMenuOpen && (
-          <div
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300"
-            onClick={() => setIsMenuOpen(false)}
-          />
-        )}
-
-        {/* Mobile Drawer Container */}
-        <div
-          className={`fixed top-0 right-0 z-50 h-full w-80 bg-[#0a0a0a] border-l-[1.5px] border-[#222222] rounded-l-[24px] shadow-2xl transition-transform duration-300 ease-in-out transform md:hidden ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          <div className="flex flex-col h-full py-6">
-            {/* Drawer Header */}
-            <div className="px-6 pb-6 flex items-center justify-between">
-              <span className="font-mono text-xs font-bold tracking-[3.5px] text-[#00ffff]">
-                NAVIGATION
-              </span>
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="p-1 text-[#888888] hover:text-white focus:outline-none transition-colors duration-200"
-                aria-label="Close menu"
-              >
-                <FaTimes size={20} />
-              </button>
-            </div>
-
-            {/* Divider */}
-            <div className="h-[1px] bg-[#222222] w-full" />
-
-            {/* Nav Links */}
-            <div className="flex-1 overflow-y-auto py-4 font-mono">
-              <a
-                href="#about"
-                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
-                onClick={(e) => {
-                  handleSectionLinkClick('about')(e);
-                  setIsMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <MdPersonOutline size={20} className="text-[#888888]" />
-                  <span className="text-sm font-medium">About</span>
-                </div>
-                <MdChevronRight size={16} className="text-[#222222]" />
-              </a>
-
-              <a
-                href="#skills"
-                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
-                onClick={(e) => {
-                  handleSectionLinkClick('skills')(e);
-                  setIsMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <MdCode size={20} className="text-[#888888]" />
-                  <span className="text-sm font-medium">Skills</span>
-                </div>
-                <MdChevronRight size={16} className="text-[#222222]" />
-              </a>
-
-              <a
-                href="#projects"
-                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
-                onClick={(e) => {
-                  handleSectionLinkClick('projects')(e);
-                  setIsMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <MdFolderOpen size={20} className="text-[#888888]" />
-                  <span className="text-sm font-medium">Projects</span>
-                </div>
-                <MdChevronRight size={16} className="text-[#222222]" />
-              </a>
-
-              <a
-                href="#experience"
-                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
-                onClick={(e) => {
-                  handleSectionLinkClick('experience')(e);
-                  setIsMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <MdWorkOutline size={20} className="text-[#888888]" />
-                  <span className="text-sm font-medium">Experience</span>
-                </div>
-                <MdChevronRight size={16} className="text-[#222222]" />
-              </a>
-
-              <a
-                href="#cv"
-                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
-                onClick={(e) => {
-                  handleSectionLinkClick('cv')(e);
-                  setIsMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <MdDescription size={20} className="text-[#888888]" />
-                  <span className="text-sm font-medium">CV</span>
-                </div>
-                <MdChevronRight size={16} className="text-[#222222]" />
-              </a>
-
-              <a
-                href="#contact"
-                className="flex items-center justify-between px-6 py-4 text-[#f5f5f5] hover:bg-[#111111] transition-colors duration-200"
-                onClick={(e) => {
-                  handleSectionLinkClick('contact')(e);
-                  setIsMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <MdMailOutline size={20} className="text-[#888888]" />
-                  <span className="text-sm font-medium">Contact</span>
-                </div>
-                <MdChevronRight size={16} className="text-[#222222]" />
-              </a>
-            </div>
-
-            {/* Footer */}
-            <div className="px-6 pt-4 font-mono text-[10px] text-[#888888]/60">
-              © {new Date().getFullYear()} Brian Sanaet Memusi
-            </div>
-          </div>
-        </div>
       </header>
 
       {/* Hero */}
