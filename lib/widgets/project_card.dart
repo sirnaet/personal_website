@@ -68,9 +68,12 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasLinks =
-        project.githubUrl != null && project.githubUrl!.isNotEmpty ||
-            project.demoUrl != null && project.demoUrl!.isNotEmpty;
+    final projectUrl = (project.githubUrl != null && project.githubUrl!.isNotEmpty)
+        ? project.githubUrl
+        : ((project.demoUrl != null && project.demoUrl!.isNotEmpty) ? project.demoUrl : null);
+    final projectLabel = (project.githubUrl != null && project.githubUrl!.isNotEmpty)
+        ? (project.githubLabel ?? 'GitHub')
+        : (project.demoLabel ?? 'Live');
 
     return MagneticHover(
       strength: 10,
@@ -155,7 +158,14 @@ class ProjectCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 8),
+            if (projectUrl != null && projectUrl.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              _ProjectButton(
+                label: projectLabel,
+                onTap: () => _openUrl(projectUrl),
+              ),
+            ],
+            const SizedBox(height: 16),
             // Tech tags as pills (matches JS: rounded-full border-white/15)
             Wrap(
               spacing: 4,
@@ -180,28 +190,6 @@ class ProjectCard extends StatelessWidget {
                 );
               }).toList(),
             ),
-            if (hasLinks) ...[
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 6,
-                runSpacing: 6,
-                children: [
-                  if (project.githubUrl != null &&
-                      project.githubUrl!.isNotEmpty)
-                    _ProjectLinkButton(
-                      label: project.githubLabel ?? 'GitHub',
-                      icon: Icons.code_rounded,
-                      onTap: () => _openUrl(project.githubUrl!),
-                    ),
-                  if (project.demoUrl != null && project.demoUrl!.isNotEmpty)
-                    _ProjectLinkButton(
-                      label: project.demoLabel ?? 'Live',
-                      icon: Icons.open_in_new_rounded,
-                      onTap: () => _openUrl(project.demoUrl!),
-                    ),
-                ],
-              ),
-            ],
           ],
         ),
       ),
@@ -209,51 +197,52 @@ class ProjectCard extends StatelessWidget {
   }
 }
 
-class _ProjectLinkButton extends StatelessWidget {
+class _ProjectButton extends StatefulWidget {
   final String label;
-  final IconData icon;
   final VoidCallback onTap;
 
-  const _ProjectLinkButton({
+  const _ProjectButton({
     required this.label,
-    required this.icon,
     required this.onTap,
   });
 
   @override
+  State<_ProjectButton> createState() => _ProjectButtonState();
+}
+
+class _ProjectButtonState extends State<_ProjectButton> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(9999),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(9999),
-            border: Border.all(
-              color: AppTheme.borderColor.withValues(alpha: 0.8),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedOpacity(
+        duration: const Duration(milliseconds: 150),
+        opacity: _isHovered ? 0.9 : 1.0,
+        child: Material(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          child: InkWell(
+            onTap: widget.onTap,
+            borderRadius: BorderRadius.circular(12),
+            splashColor: Colors.black.withValues(alpha: 0.1),
+            highlightColor: Colors.black.withValues(alpha: 0.05),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              alignment: Alignment.center,
+              child: Text(
+                widget.label,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: AppTheme.headingFont,
+                ),
+              ),
             ),
-            color: AppTheme.surfaceColor.withValues(alpha: 0.55),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                icon,
-                size: 12,
-                color: AppTheme.textPrimary,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                label,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppTheme.textPrimary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 10,
-                    ),
-              ),
-            ],
           ),
         ),
       ),
