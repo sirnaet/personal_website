@@ -3,6 +3,8 @@ import 'package:personal_website/theme/app_theme.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:personal_website/widgets/magnetic_hover.dart';
 
+import 'package:personal_website/widgets/glassmorphic_container.dart';
+
 class ExperienceSection extends StatelessWidget {
   const ExperienceSection({super.key});
 
@@ -179,16 +181,9 @@ class ExperienceTimelineItem extends StatelessWidget {
               child: MagneticHover(
                 strength: 10,
                 scale: 1.03,
-                child: Container(
+                child: GlassmorphicContainer(
                   padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: AppTheme.cardColor,
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(
-                      color: AppTheme.borderColor,
-                      width: 1.5,
-                    ),
-                  ),
+                  borderRadius: BorderRadius.circular(24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

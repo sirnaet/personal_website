@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_website/theme/app_theme.dart';
 import 'package:personal_website/models/project.dart';
 import 'package:personal_website/widgets/magnetic_hover.dart';
+import 'package:personal_website/widgets/glassmorphic_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Project card matching JS version: rounded-3xl, top placeholder, title, description, tech pills.
@@ -24,6 +25,47 @@ class ProjectCard extends StatelessWidget {
     }
   }
 
+  LinearGradient _getProjectGradient(String title) {
+    switch (title) {
+      case 'School Bloom':
+        return const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0x4C059669), // emerald-600/30
+            Color(0x1A134E4A), // teal-900/10
+          ],
+        );
+      case 'Love Notes':
+        return const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0x4CDB2777), // pink-600/30
+            Color(0x1A4C0519), // rose-900/10
+          ],
+        );
+      case 'Personal Portfolio Website':
+        return const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0x4C4F46E5), // indigo-600/30
+            Color(0x1A4C1D95), // violet-900/10
+          ],
+        );
+      default: // e.g. FedhaSmart
+        return const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0x4CD97706), // amber-600/30
+            Color(0x1A7C2D12), // orange-900/10
+          ],
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final hasLinks =
@@ -33,27 +75,40 @@ class ProjectCard extends StatelessWidget {
     return MagneticHover(
       strength: 10,
       scale: 1.02,
-      child: Container(
+      child: GlassmorphicContainer(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppTheme.cardColor,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: AppTheme.borderColor.withValues(alpha: 0.6),
-            width: 1,
-          ),
-        ),
+        borderRadius: BorderRadius.circular(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Top placeholder (matches JS: h-40 rounded-2xl bg-white/10)
+            // Top placeholder (matches JS: h-40 rounded-2xl bg-white/10 with gradient and initials)
             Container(
-              height: 92,
+              height: 120,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.06),
+                gradient: _getProjectGradient(project.title),
                 borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.05),
+                  width: 1,
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  project.title
+                      .split(' ')
+                      .where((w) => w.isNotEmpty)
+                      .map((w) => w[0])
+                      .join('')
+                      .toUpperCase(),
+                  style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0x4DFFFFFF), // white/30
+                    letterSpacing: 2.0,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 12),

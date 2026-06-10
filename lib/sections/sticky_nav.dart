@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:personal_website/theme/app_theme.dart';
 
@@ -11,19 +12,22 @@ class StickyNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 768;
 
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 20 : 40,
-        vertical: isMobile ? 12 : 16,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.8),
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.white.withValues(alpha: 0.1),
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 40,
+            vertical: isMobile ? 12 : 16,
           ),
-        ),
-      ),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.8),
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.white.withValues(alpha: 0.1),
+              ),
+            ),
+          ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -69,7 +73,9 @@ class StickyNav extends StatelessWidget {
             ),
         ],
       ),
-    );
+    ),
+  ),
+);
   }
 }
 

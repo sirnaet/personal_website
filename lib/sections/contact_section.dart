@@ -6,6 +6,7 @@ import 'package:personal_website/theme/app_theme.dart';
 import 'package:personal_website/widgets/cyber_button.dart';
 import 'package:personal_website/widgets/magnetic_hover.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:personal_website/widgets/glassmorphic_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactSection extends StatefulWidget {
@@ -220,15 +221,9 @@ class _ContactInfo extends StatelessWidget {
     return MagneticHover(
       strength: 12,
       scale: 1.01,
-      child: Container(
+      child: GlassmorphicContainer(
         padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: AppTheme.cardColor.withValues(alpha: 0.45),
-          border: Border.all(
-            color: AppTheme.borderColor,
-            width: 1.5,
-          ),
-        ),
+        borderRadius: BorderRadius.circular(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -378,15 +373,9 @@ class _ContactItem extends StatelessWidget {
         child: MagneticHover(
           strength: 10,
           scale: 1.02,
-          child: Container(
+          child: GlassmorphicContainer(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppTheme.cardColor,
-              border: Border.all(
-                color: AppTheme.borderColor,
-                width: 1.5,
-              ),
-            ),
+            borderRadius: BorderRadius.circular(12),
             child: Row(
               children: [
                 icon,
@@ -440,15 +429,9 @@ class _ContactForm extends StatelessWidget {
     return MagneticHover(
       strength: 12,
       scale: 1.01,
-      child: Container(
+      child: GlassmorphicContainer(
         padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: AppTheme.cardColor.withValues(alpha: 0.45),
-          border: Border.all(
-            color: AppTheme.borderColor,
-            width: 1.5,
-          ),
-        ),
+        borderRadius: BorderRadius.circular(24),
         child: Form(
           key: formKey,
           child: Column(
@@ -593,7 +576,7 @@ class _FormFieldState extends State<_FormField> {
               ),
             ),
             filled: true,
-            fillColor: AppTheme.cardColor,
+            fillColor: Colors.white.withValues(alpha: 0.03),
           ),
         ),
       ),

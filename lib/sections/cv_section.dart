@@ -4,6 +4,7 @@ import 'package:personal_website/theme/app_theme.dart';
 import 'package:personal_website/widgets/cyber_button.dart';
 import 'package:personal_website/widgets/magnetic_hover.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:personal_website/widgets/glassmorphic_container.dart';
 import 'package:personal_website/utils/file_downloader.dart';
 
 /// CV/Resume section matching JS version.
@@ -31,19 +32,12 @@ class CvSection extends StatelessWidget {
       child: MagneticHover(
         strength: 10,
         scale: 1.03,
-        child: Container(
+        child: GlassmorphicContainer(
           padding: EdgeInsets.symmetric(
             horizontal: isMobile ? 24 : 40,
             vertical: 40,
           ),
-          decoration: BoxDecoration(
-            color: AppTheme.cardColor,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: AppTheme.borderColor.withValues(alpha: 0.6),
-              width: 1,
-            ),
-          ),
+          borderRadius: BorderRadius.circular(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

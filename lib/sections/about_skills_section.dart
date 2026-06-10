@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_website/theme/app_theme.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:personal_website/widgets/magnetic_hover.dart';
+import 'package:personal_website/widgets/glassmorphic_container.dart';
 
 /// About + Skills combined section matching JS version (two cards side by side).
 class AboutSkillsSection extends StatelessWidget {
@@ -174,16 +175,9 @@ class _SectionCard extends StatelessWidget {
     return MagneticHover(
       strength: 10,
       scale: 1.03,
-      child: Container(
+      child: GlassmorphicContainer(
         padding: const EdgeInsets.all(32),
-        decoration: BoxDecoration(
-          color: AppTheme.cardColor,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: AppTheme.borderColor.withValues(alpha: 0.6),
-            width: 1,
-          ),
-        ),
+        borderRadius: BorderRadius.circular(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
