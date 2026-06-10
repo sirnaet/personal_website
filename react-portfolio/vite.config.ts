@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/react-portfolio/',
   build: {
-    outDir: '../web/react-portfolio',
+    outDir: '../build/web/react-portfolio',
     emptyOutDir: true,
     rollupOptions: {
       output: {
