@@ -94,8 +94,13 @@ class _MagneticHoverState extends State<MagneticHover> {
         curve: widget.curve,
         transformAlignment: Alignment.center,
         transform: Matrix4.identity()
-          ..translate(_offset.dx, _offset.dy)
-          ..scale(_hovered ? widget.scale : 1.0),
+          ..translateByDouble(_offset.dx, _offset.dy, 0.0, 1.0)
+          ..scaleByDouble(
+            _hovered ? widget.scale : 1.0,
+            _hovered ? widget.scale : 1.0,
+            1.0,
+            1.0,
+          ),
         child: widget.child,
       ),
     );

@@ -11,10 +11,10 @@ class CvSection extends StatelessWidget {
   const CvSection({super.key});
 
   Future<void> _downloadCv(BuildContext context) async {
-    const url = '/cv/SanaetMemusiCV.pdf';
+    const url = '/cv/MemusiSanaetCV.pdf';
     await downloadFile(
       url,
-      filename: kIsWeb ? 'SanaetMemusiCV.pdf' : null,
+      filename: kIsWeb ? 'MemusiSanaetCV.pdf' : null,
     );
   }
 

@@ -98,16 +98,18 @@ class _CyberButtonState extends State<CyberButton>
                         ),
                         const SizedBox(width: 12),
                       ],
-                      Text(
-                        widget.text,
-                        style: TextStyle(
-                          fontFamily: AppTheme.headingFont,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: widget.isPrimary
-                              ? AppTheme.accentColor
-                              : AppTheme.textPrimary,
-                          letterSpacing: 0.5,
+                      Flexible(
+                        child: Text(
+                          widget.text,
+                          style: TextStyle(
+                            fontFamily: AppTheme.headingFont,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: widget.isPrimary
+                                ? AppTheme.accentColor
+                                : AppTheme.textPrimary,
+                            letterSpacing: 0.5,
+                          ),
                         ),
                       ),
                     ],

@@ -507,7 +507,7 @@ export default function PersonalWebsite() {
           <div className="mt-6 flex flex-wrap gap-4">
             <a
               href={cvDownloadUrl}
-              download="SanaetMemusiCV.pdf"
+              download="MemusiSanaetCV.pdf"
               className="w-full sm:w-auto rounded-2xl bg-white px-5 py-3 text-sm font-medium text-black transition hover:opacity-90 text-center"
             >
               Download CV
