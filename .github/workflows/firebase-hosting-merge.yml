@@ -6,6 +6,11 @@ on:
   push:
     branches:
       - master
+permissions:
+  checks: write
+  contents: read
+  deployments: write
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -13,8 +18,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.x'  # Specify your required Flutter version
-      - run: flutter build web
+          channel: 'stable'
+          cache: true
+      - run: flutter pub get
+      - run: flutter build web --release
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

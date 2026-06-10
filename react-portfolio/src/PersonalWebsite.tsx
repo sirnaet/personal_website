@@ -369,6 +369,7 @@ export default function PersonalWebsite() {
                 'Git',
                 'Java',
                 'C++',
+                'Arduino',
                 'Postgresql',
                 'MariaDB',
                 'Supabase',

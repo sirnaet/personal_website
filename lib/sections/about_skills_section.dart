@@ -23,6 +23,7 @@ class AboutSkillsSection extends StatelessWidget {
     'Git',
     'Java',
     'C++',
+    'Arduino',
     'Postgresql',
     'MariaDB',
     'Supabase',
